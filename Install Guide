@@ -1,0 +1,71 @@
+Deutsch:
+
+Installation über WinSCP:
+
+1. Lade den Bot als ZIP herunter oder klone das Repository.
+2. Öffne WinSCP und verbinde dich mit deinem Server.
+3. Navigiere auf dem Server zu dem Ordner, in dem der Bot liegen soll.
+4. Ziehe alle Dateien aus dem Bot-Ordner per Drag & Drop in den Server-Ordner.
+5. Erstelle auf dem Server eine virtuelle Umgebung:
+   python3 -m venv venv
+6. Aktiviere die virtuelle Umgebung:
+   source venv/bin/activate
+7. Installiere die benötigten Pakete:
+   pip install -r requirements.txt
+8. Kopiere die Datei config.example.json zu config.json.
+9. Trage in config.json deinen Bot-Token, Channel-ID und Rollen-IDs ein.
+10. Starte den Bot:
+    python3 bot.py
+
+Aktivierung im Discord Developer Portal:
+
+1. Öffne https://discord.com/developers/applications
+2. Wähle deine Bot-Anwendung aus.
+3. Gehe zu "Bot" und kopiere den Token in die config.json.
+4. Stelle sicher, dass "MESSAGE CONTENT INTENT" aktiviert ist.
+5. Gehe zu "OAuth2" → "URL Generator".
+6. Wähle "bot" und "applications.commands".
+7. Wähle die benötigten Berechtigungen aus (z. B. Send Messages, Use Slash Commands).
+8. Kopiere den generierten Link und füge den Bot auf deinem Server hinzu.
+9. Starte den Bot auf deinem Server.
+
+Bei Fragen:
+Discord: .just.jamie.
+GitHub: Jamie-pyss
+
+-------------------------------------------------------------------------------------------------------------
+
+English:
+
+Installation via WinSCP:
+
+1. Download the bot as ZIP or clone the repository.
+2. Open WinSCP and connect to your server.
+3. Navigate to the folder where the bot should be stored.
+4. Drag and drop all bot files into the server folder.
+5. Create a virtual environment on the server:
+   python3 -m venv venv
+6. Activate the virtual environment:
+   source venv/bin/activate
+7. Install the required packages:
+   pip install -r requirements.txt
+8. Copy config.example.json to config.json.
+9. Enter your bot token, channel ID and role IDs into config.json.
+10. Start the bot:
+    python3 bot.py
+
+Activation in the Discord Developer Portal:
+
+1. Open https://discord.com/developers/applications
+2. Select your bot application.
+3. Go to "Bot" and copy the token into config.json.
+4. Make sure "MESSAGE CONTENT INTENT" is enabled.
+5. Go to "OAuth2" → "URL Generator".
+6. Select "bot" and "applications.commands".
+7. Select the required permissions (e.g. Send Messages, Use Slash Commands).
+8. Copy the generated link and add the bot to your server.
+9. Start the bot on your server.
+
+If you have questions:
+Discord: .just.jamie.
+GitHub: Jamie-pyss
