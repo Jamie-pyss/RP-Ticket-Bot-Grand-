@@ -1,0 +1,18 @@
+{
+  // Bot Token aus dem Discord Developer Portal
+  "token": "HIER_DEIN_TOKEN_EINTRAGEN",
+
+  // Channel ID in welchem der Bot Nachrichten posten soll
+  "channel_id": 123456789012345678,
+
+  // Rollen die gepingt werden sollen
+  "roles_to_ping": [111111111111111111],
+
+  // Rollen die gewonnen drücken dürfen
+  "button_role_ids": [222222222222222222],
+
+  // Dateien für den internen Bot-Status
+  "state_file": "ui_state.json",
+  "collected_file": "collected.json",
+  "start_file": "start.json"
+}
