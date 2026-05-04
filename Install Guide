@@ -11,10 +11,11 @@ Installation über WinSCP:
 6. Aktiviere die virtuelle Umgebung:
    source venv/bin/activate
 7. Installiere die benötigten Pakete:
-   pip install -r requirements.txt
+   pip install discord.py
 8. Kopiere die Datei config.example.json zu config.json.
-9. Trage in config.json deinen Bot-Token, Channel-ID und Rollen-IDs ein.
-10. Starte den Bot:
+9. Entferne in config.json **alle Kommentare**, da JSON keine Kommentare erlaubt.
+10. Trage in config.json deinen Bot-Token, Channel-ID und Rollen-IDs ein.
+11. Starte den Bot:
     python3 bot.py
 
 Aktivierung im Discord Developer Portal:
@@ -48,10 +49,11 @@ Installation via WinSCP:
 6. Activate the virtual environment:
    source venv/bin/activate
 7. Install the required packages:
-   pip install -r requirements.txt
+   pip install discord.py
 8. Copy config.example.json to config.json.
-9. Enter your bot token, channel ID and role IDs into config.json.
-10. Start the bot:
+9. Remove **all comments** from config.json, because JSON does not support comments.
+10. Enter your bot token, channel ID and role IDs into config.json.
+11. Start the bot:
     python3 bot.py
 
 Activation in the Discord Developer Portal:
