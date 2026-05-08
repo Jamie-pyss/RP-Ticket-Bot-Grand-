@@ -53,30 +53,23 @@ def log_collection(user, start_hour):
         "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "StartHour": start_hour
     }
-
     data = load_json(COLLECTED_FILE)
     if not isinstance(data, list):
         data = []
-
     data.append(entry)
     save_json(COLLECTED_FILE, data)
-
 
 def log_winner(user, start_hour):
     data = load_json(START_FILE)
     current_hour_key = datetime.now().strftime("%Y-%m-%d_%H")
-
     if str(start_hour) not in data:
         data[str(start_hour)] = {}
-
     data[str(start_hour)][current_hour_key] = {
         "DiscordName": str(user),
         "DiscordID": str(user.id),
         "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     }
-
     save_json(START_FILE, data)
-
 
 # ---- HELPER ----
 
@@ -107,20 +100,20 @@ class RPView(View):
         hour = int(label.split(" ")[0])
         current_hour_key = datetime.now().strftime("%Y-%m-%d_%H")
 
-        if last_winner_press.get(hour) == current_hour_key:
-            await interaction.response.send_message(
-                "Für diese Stunde wurde bereits auf **Gewonnen** gedrückt!",
-                ephemeral=True
-            )
-            return
+        data = load_json(START_FILE)
+        if str(hour) in data and current_hour_key in data[str(hour)]:
+            existing_winner = data[str(hour)][current_hour_key]["DiscordID"]
+            if existing_winner == str(interaction.user.id):
+                await interaction.response.send_message("Du hast in dieser Stunde bereits gewonnen!", ephemeral=True)
+                return
+            else:
+                await interaction.response.send_message("Für diese Stunde wurde bereits ein Gewinner festgelegt!", ephemeral=True)
+                return
 
-        last_winner_press[hour] = current_hour_key
         log_winner(interaction.user, hour)
+        last_winner_press[hour] = current_hour_key
 
-        await interaction.response.send_message(
-            f"🏆 {interaction.user.mention} hat **{label} gewonnen!**",
-            ephemeral=False
-        )
+        await interaction.response.send_message(f"🏆 {interaction.user.mention} hat **{label} gewonnen!**", ephemeral=False)
 
         start_hour = hour
         end_hour = {10: 16, 16: 22, 22: 4}[hour]
@@ -151,10 +144,7 @@ class ConfirmView(View):
 
         current_hour_key = datetime.now().strftime("%Y-%m-%d_%H")
         if last_confirm.get(self.start_hour) == current_hour_key:
-            await interaction.response.send_message(
-                "Für diese Stunde wurde schon eingesammelt!",
-                ephemeral=True
-            )
+            await interaction.response.send_message("Für diese Stunde wurde schon eingesammelt!", ephemeral=True)
             return
 
         last_confirm[self.start_hour] = current_hour_key
