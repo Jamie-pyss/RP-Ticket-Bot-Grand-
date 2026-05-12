@@ -47,11 +47,13 @@ def save_json(file, data):
 # ---- LOGGING ----
 
 def log_collection(user, start_hour):
+    current_hour_key = datetime.now().strftime("%Y-%m-%d_%H")
     entry = {
         "DiscordName": str(user),
         "DiscordID": str(user.id),
         "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "StartHour": start_hour
+        "StartHour": start_hour,
+        "HourKey": current_hour_key
     }
     data = load_json(COLLECTED_FILE)
     if not isinstance(data, list):
@@ -143,13 +145,16 @@ class ConfirmView(View):
             return
 
         current_hour_key = datetime.now().strftime("%Y-%m-%d_%H")
-        if last_confirm.get(self.start_hour) == current_hour_key:
-            await interaction.response.send_message("Für diese Stunde wurde schon eingesammelt!", ephemeral=True)
-            return
+        data = load_json(COLLECTED_FILE)
+        if isinstance(data, list):
+            for entry in data:
+                if entry.get("StartHour") == self.start_hour and entry.get("HourKey") == current_hour_key:
+                    await interaction.response.send_message("Für diese Stunde wurde schon eingesammelt!", ephemeral=True)
+                    return
 
+        log_collection(interaction.user, self.start_hour)
         last_confirm[self.start_hour] = current_hour_key
         skip_until_next_hour[self.start_hour] = current_hour_key
-        log_collection(interaction.user, self.start_hour)
 
         await interaction.response.send_message(f"{interaction.user.mention} hat eingesammelt!", ephemeral=False)
 
